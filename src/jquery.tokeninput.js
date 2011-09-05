@@ -287,7 +287,6 @@ $.TokenList = function (input, url_or_data, settings) {
     // Keep a reference to the original input box
     var hidden_input = $(input)
                            .hide()
-                           .val("")
                            .focus(function () {
                                input_box.focus();
                            })
@@ -359,7 +358,14 @@ $.TokenList = function (input, url_or_data, settings) {
         });
 
     // Pre-populate list if items exist
+    var input_value = hidden_input.val();
     hidden_input.val("");
+    if (input_value) {
+        var input_items = anterior.split(','); 
+        $.each(input_items, function(key, val) {
+            add_new_token(val);
+        });
+    }
     var li_data = settings.prePopulate || hidden_input.data("pre");
     if(settings.processPrePopulate && $.isFunction(settings.onResult)) {
         li_data = settings.onResult.call(hidden_input, li_data);
