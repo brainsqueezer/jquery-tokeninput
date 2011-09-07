@@ -361,8 +361,9 @@ $.TokenList = function (input, url_or_data, settings) {
     var input_value = hidden_input.val();
     hidden_input.val("");
     if (input_value) {
-        var input_items = anterior.split(','); 
+        var input_items = input_value.split(','); 
         $.each(input_items, function(key, val) {
+            val = $.trim(val);
             add_new_token(val);
         });
     }
